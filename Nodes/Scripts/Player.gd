@@ -7,7 +7,6 @@ const JUMP_FORCE = -250
 const FLOOR = Vector2(0, -1)
 
 const FIREBALL = preload("res://Nodes/Prefabs/Fireball.tscn")
-const FIREBALL_BLUE = preload("res://Nodes/Prefabs/FireballBlue.tscn")
 
 var velocity = Vector2()
 var on_ground = false
@@ -67,11 +66,9 @@ func _physics_process(delta: float) -> void:
 				velocity.x = 0
 			is_attacking = true
 			$AnimatedSprite.play("attack")
-			var fireball = null
-			if fireball_power == 1:
-				fireball = FIREBALL.instance()
-			else:
-				fireball = FIREBALL_BLUE.instance()
+			var fireball = FIREBALL.instance()
+			fireball.set_fireball_power(fireball_power)
+
 			if sign($Position2D.position.x) == 1:
 				fireball.set_fireball_direction(1)
 			else:

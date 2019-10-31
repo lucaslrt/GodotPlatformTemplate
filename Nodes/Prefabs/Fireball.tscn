@@ -1,16 +1,22 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Nodes/Scripts/Fireball.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Fireball1.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Fireball2.png" type="Texture" id=3]
-
+[ext_resource path="res://Sprites/FireballBlue1.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/FireballBlue2.png" type="Texture" id=5]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
-"name": "shoot",
+"name": "red_shoot",
 "speed": 12.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "blue_shoot",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
@@ -26,7 +32,6 @@ __meta__ = {
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-animation = "shoot"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1.88464, 0.269234 )
