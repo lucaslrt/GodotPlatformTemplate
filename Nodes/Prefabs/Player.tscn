@@ -1,0 +1,93 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Nodes/Scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://Nodes/Shaders/PlayerShaders.tres" type="Material" id=2]
+[ext_resource path="res://Sprites/character1.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/characterDie2.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/characterDie.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/CharacterAttack.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/character7.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/character2.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/character16.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/character17.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/character18.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/character3.png" type="Texture" id=12]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": false,
+"name": "idle",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "dead",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "attack",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": false,
+"name": "fall",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "run",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 12 ) ],
+"loop": false,
+"name": "jump",
+"speed": 0.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 5, 7 )
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 5.0
+
+[node name="Player" type="KinematicBody2D"]
+z_index = 1
+collision_mask = 22
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = ExtResource( 2 )
+frames = SubResource( 1 )
+animation = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, 3 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, 11 )
+shape = SubResource( 3 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 12, 6 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 400
+limit_bottom = 180
+smoothing_enabled = true
+editor_draw_limits = true
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
