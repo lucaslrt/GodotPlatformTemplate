@@ -20,8 +20,8 @@ func _ready() -> void:
 	pass
 
 func adjust_camera_limits() -> void:
-	var tilemap_rect = get_parent().get_node("TileMap").get_used_rect()
-	var tilemap_cell_size = get_parent().get_node("TileMap").cell_size
+	var tilemap_rect = get_parent().get_node("Tilemaps/Ground").get_used_rect()
+	var tilemap_cell_size = get_parent().get_node("Tilemaps/Ground").cell_size
 	$Camera2D.limit_left = tilemap_rect.position.x * tilemap_cell_size.x
 	$Camera2D.limit_right = tilemap_rect.end.x * tilemap_cell_size.x
 	$Camera2D.limit_top = tilemap_rect.position.y * tilemap_cell_size.y
