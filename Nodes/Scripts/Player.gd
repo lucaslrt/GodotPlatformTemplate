@@ -9,19 +9,24 @@ const FLOOR = Vector2(0, -1)
 const FIREBALL = preload("res://Nodes/Prefabs/Fireball.tscn")
 
 var velocity = Vector2()
+var snap_normal = Vector2.DOWN setget set_snap_normal
 var on_ground = false
 var is_attacking = false
 var is_dead = false
 var fireball_power = 1
 var jump_count = 0
 
+func set_snap_normal(new_snap_normal):
+	snap_normal = new_snap_normal
+	pass
+
 func _ready() -> void:
 	adjust_camera_limits()
 	pass
 
 func adjust_camera_limits() -> void:
-	var tilemap_rect = get_parent().get_node("Tilemaps/Ground").get_used_rect()
-	var tilemap_cell_size = get_parent().get_node("Tilemaps/Ground").cell_size
+	var tilemap_rect = get_parent().get_node("Environment/Ground").get_used_rect()
+	var tilemap_cell_size = get_parent().get_node("Environment/Ground").cell_size
 	$Camera2D.limit_left = tilemap_rect.position.x * tilemap_cell_size.x
 	$Camera2D.limit_right = tilemap_rect.end.x * tilemap_cell_size.x
 	$Camera2D.limit_top = tilemap_rect.position.y * tilemap_cell_size.y
@@ -78,7 +83,7 @@ func _physics_process(delta: float) -> void:
 
 		velocity.y += GRAVITY
 
-		velocity = move_and_slide(velocity, FLOOR)
+		velocity = move_and_slide_with_snap(velocity, snap_normal * 2, FLOOR)
 
 		if is_on_floor():
 			if !on_ground:
@@ -107,7 +112,7 @@ func dead():
 	velocity = Vector2(0,0)
 	$AnimatedSprite.play("dead")
 	$CollisionShape2D.set_deferred("disabled", true)
-	$CollisionShape2D2.set_deferred("disabled", true)
+	#$CollisionShape2D2.set_deferred("disabled", true)
 	$Timer.start()
 
 func _on_AnimatedSprite_animation_finished() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Nodes/Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Nodes/Shaders/PlayerShaders.tres" type="Material" id=2]
@@ -20,15 +20,20 @@ animations = [ {
 "name": "idle",
 "speed": 0.0
 }, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "attack",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "dead",
 "speed": 20.0
 }, {
-"frames": [ ExtResource( 6 ) ],
-"loop": true,
-"name": "attack",
-"speed": 5.0
+"frames": [ ExtResource( 12 ) ],
+"loop": false,
+"name": "jump",
+"speed": 0.0
 }, {
 "frames": [ ExtResource( 7 ) ],
 "loop": false,
@@ -39,22 +44,16 @@ animations = [ {
 "loop": true,
 "name": "run",
 "speed": 12.0
-}, {
-"frames": [ ExtResource( 12 ) ],
-"loop": false,
-"name": "jump",
-"speed": 0.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 5, 7 )
-
-[sub_resource type="CircleShape2D" id=3]
-radius = 5.0
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 4.91084
+height = 8.04986
 
 [node name="Player" type="KinematicBody2D"]
 z_index = 1
-collision_mask = 22
+collision_mask = 54
+collision/safe_margin = 0.3
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -66,14 +65,8 @@ frames = SubResource( 1 )
 animation = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( 0, 3 )
+position = Vector2( 0.628212, 6.50005 )
 shape = SubResource( 2 )
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( 0, 11 )
-shape = SubResource( 3 )
 
 [node name="Position2D" type="Position2D" parent="."]
 position = Vector2( 12, 6 )
