@@ -83,7 +83,7 @@ func _physics_process(delta: float) -> void:
 
 		velocity.y += GRAVITY
 
-		velocity = move_and_slide_with_snap(velocity, snap_normal * 2, FLOOR)
+		velocity.y = move_and_slide_with_snap(velocity, snap_normal * 2, FLOOR, true).y
 
 		if is_on_floor():
 			if !on_ground:

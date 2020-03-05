@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "CollisionShape2D",
+"class": "CollisionDrawer2D",
+"language": "GDScript",
+"path": "res://Nodes/Tools/CollisionDrawer2D.gd"
+} ]
 _global_script_class_icons={
-
+"CollisionDrawer2D": ""
 }
 
 [application]

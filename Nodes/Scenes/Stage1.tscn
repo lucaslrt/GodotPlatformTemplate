@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Nodes/Tilesets/ground.tres" type="TileSet" id=1]
 [ext_resource path="res://Nodes/Prefabs/Player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,10 @@
 [ext_resource path="res://Nodes/Scenes/PauseMenu.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Nodes/Prefabs/DeathCollider.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Nodes/Prefabs/MovingPlatform.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Nodes/Tools/CollisionDrawer2D.gd" type="Script" id=11]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 28.8154, 10 )
 
 [node name="Stage1" type="Node2D"]
 
@@ -30,6 +34,15 @@ collision_layer = 32
 collision_mask = 3
 format = 1
 tile_data = PoolIntArray( 458759, 4, 0, 458760, 1, 0, 458761, 1, 0, 458762, 1, 0, 458763, 1, 0, 458764, 5, 0, 589829, 4, 0, 589830, 1, 0, 589831, 1, 0, 589832, 1, 0, 589833, 1, 0, 589834, 5, 0, 655388, 0, 0 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment"]
+collision_layer = 4
+
+[node name="CollisionDrawer2D" type="CollisionShape2D" parent="Environment/StaticBody2D"]
+position = Vector2( 51.8271, 154.198 )
+rotation = -0.541052
+shape = SubResource( 1 )
+script = ExtResource( 11 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 64.478, 61.3432 )
